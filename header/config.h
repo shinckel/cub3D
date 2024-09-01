@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_config.h                                       :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dde-sott <dde-sott@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:20:00 by shinckel          #+#    #+#             */
-/*   Updated: 2024/08/11 12:52:56 by dde-sott         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:48:43 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,45 +79,6 @@ typedef struct s_colors
 	int	floor;
 	int	ceiling;
 }	t_colors;
-
-/* ******************************* */
-/* px		: player x coordinate  */
-/* py 		: player y coordinate  */
-/* dtp		: distance to plane    */
-/* dtp		: distance to plane    */
-/* pdc		: plane distance const */
-/*                                 */
-/*         SLICE_SIZE              */
-/* pdc = ---------------           */
-/*             dtp                 */
-/*                                 */
-/* width	: width * TILE_SIZE    */
-/* height	: height * TILE_SIZE   */
-/* angle	: pov angle            */
-/* mag 		: magnitude (speed)    */
-/* *_up		: northUP, southUP ... */
-/* ******************************* */
-// typedef struct s_pov
-// {
-// 	t_point		p;
-// 	int			dtp;
-// 	int			center;
-// 	int			width;
-// 	int			height;
-// 	int			angle;
-// 	int			mag;
-// 	int			n_down;
-// 	int			s_down;
-// 	int			e_down;
-// 	int			w_down;
-// }		t_pov;
-
-// typedef struct s_sprite
-// {
-// 	double	x;
-// 	double	y;
-// 	int		texture;
-// }				t_sprite;
 
 typedef struct s_ray
 {
