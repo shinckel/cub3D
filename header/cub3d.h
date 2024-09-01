@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:19:57 by shinckel          #+#    #+#             */
-/*   Updated: 2024/08/29 15:53:22 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/01 19:27:59 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "cub_math.h"
@@ -37,36 +38,29 @@
 # define KEY_RIGHT  65363
 # define KEY_ESC	65307
 
+// checking map validation
+int		check_single_player(char **mcopy, t_game *game);
+int		check_map_char(char **mcopy, t_game *game);
+int		check_enclosed_map(char **map, t_game *game);
+void	counting_map(t_game *game, char **map);
+char	*trim_end_whitespace(char *str);
+// free
+void	free_matrix(char **matrix);
+void	finish_game(char* msg, t_game *game);
+void	cleanup(t_game *game);
+void	free_list(t_list *lst);
+// map copy and flood fill
+char	**map_copy(char **map, t_game *game);
+void	flood_fill(char **map_copy, int x, int y, t_game *game);
+char	**convert_map_to_array(t_list *map_lines);
+// map size
+
+// validate textures and colors
+char	**read_map(char *filename, t_game *game);
+void	extract_textures_and_colors(int fd, t_game *game);
+void	extract_texture(char *line, t_game *game, int *textures_found);
+int		parse_color(char *color_str, t_game *game);
+// file management
+int		open_file(char *filename);
+
 #endif
-// # define MINIMAP_W	100
-// # define MINIMAP_H	100
-// # define MT_SZE ((TILE_SIZE + MAP_SCALE - 1) / MAP_SCALE)
-// MAP_TILE_SIZE = (int)round((double)TILE_SIZE / (double)MAP_SCALE)
-// This must be true ALWAYS!
-// Because of the norm ;( we can't have this
-//# define MAP_TILE_SIZE        8
-// # define MAGNITUDE_ANGLE	3
-// # define MAGNITUDE		10
-// # define SPRITE_AMMOUNT 	3
-// # ifndef LINUX
-// #  define LINUX
-// #  define KEY_Q	12
-// #  define KEY_E	14
-// #  define KEY_UP	126
-// #  define KEY_DOWN	125
-// #  define BUFFER_SIZE 1024
-// # else
-// #  define KEY_A 97
-// #  define KEY_S 115
-// #  define KEY_D 100
-// #  define KEY_Q 113
-// #  define KEY_W 119
-// #  define KEY_E 101
-// #  define KEY_UP	65362
-// #  define KEY_DOWN	65364
-// #  define KEY_LEFT	65361
-// #  define KEY_RIGHT	65363
-// #  define KEY_ESC	65307
-// # endif
-// # include "limits.h"
-// # include "ft_printf.h"

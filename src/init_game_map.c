@@ -1,107 +1,117 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   init_game_map.c                                    :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2024/08/29 16:38:38 by shinckel          #+#    #+#             */
-// /*   Updated: 2024/08/29 16:38:39 by shinckel         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 16:38:38 by shinckel          #+#    #+#             */
+/*   Updated: 2024/09/01 19:02:48 by shinckel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// char	**map_copy(char **map, t_game *game)
-// {
-// 	char	**mcopy;
-// 	int		i;
+#include "../header/cub3d.h"
 
-// 	mcopy = (char **)malloc(sizeof(char *) * (game->config.height + 1));
-// 	if (!mcopy)
-// 	{
-// 		printf("Error:\n Memory allocation error\n");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	i = 0;
-// 	while (map[i])
-// 	{
-// 		mcopy[i] = ft_strdup(map[i]);
-// 		if (!mcopy[i])
-// 		{
-// 			printf("Error:\nMemory allocation error\n");
-// 			exit(EXIT_FAILURE);
-// 		}
-// 		i++;
-// 	}
-// 	mcopy[i] = NULL;
-// 	return (mcopy);
-// }
+char	**convert_map_to_array(t_list *map_lines)
+{
+	t_list	*tmp;
+	int		map_height;
+	char	**map;
+	int		i;
 
-// int	check_map_char(char **mcopy, t_game *game)
-// {
-// 	int		i;
-// 	int		j;
+	map_height = 0;
+	i = 0;
+	tmp = map_lines;
+	while (tmp)
+	{
+		map_height++;
+		tmp = tmp->next;
+	}
+	map = (char **)malloc(sizeof(char *) * (map_height + 1));
+	map[map_height] = NULL;
+	tmp = map_lines;
+	while (tmp)
+	{
+		map[i] = ft_strdup((char *)tmp->content);
+		i++;
+		tmp = tmp->next;
+	}
+	free_list(map_lines);
+	return (map);
+}
 
-// 	i = 0;
-// 	while (mcopy[i])
-// 	{
-// 		j = 0;
-// 		while (mcopy[i][j])
-// 		{
-// 			if (mcopy[i][j] != '0' && mcopy[i][j] != 'N'
-// 				&& mcopy[i][j] != 'E' && mcopy[i][j] != 'W'
-// 				&& mcopy[i][j] != 'S' && mcopy[i][j] != '1'
-// 				&& mcopy[i][j] != '\0' && mcopy[i][j] != ' '
-// 				&& mcopy[i][j] != '\t' && mcopy[i][j] != '\n')
-// 			{
-// 				printf("Error:\nThere are different characters in the map!\n");
-// 				cleanup(game);
-// 				exit(EXIT_FAILURE);
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
+char	**read_map(char *filename, t_game *game)
+{
+	int		fd;
+	t_list	*map_lines;
+	t_list	*new_node;
+	char	*line;
+	char	**map;
 
-// int	check_enclosed_map(char **map, t_game *game)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**mcopy;
+	fd = open_file(filename);
+	extract_textures_and_colors(fd, game);
+	map_lines = NULL;
+	new_node = NULL;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		new_node = ft_lstnew(ft_strdup(line));
+		ft_lstadd_back(&map_lines, new_node);
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!map_lines)
+		finish_game("Map is empty!", game);
+	close(fd);
+	map = convert_map_to_array(map_lines);
+	return (map);
+}
 
-// 	mcopy = map_copy(map, game);
-// 	i = 0;
-// 	while (mcopy[i])
-// 	{
-// 		j = 0;
-// 		while (mcopy[i][j])
-// 		{
-// 			if (mcopy[i][j] == '0' || mcopy[i][j] == 'N' || mcopy[i][j] == 'E'
-// 				|| mcopy[i][j] == 'W' || mcopy[i][j] == 'S')
-// 				flood_fill(mcopy, j, i, game);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	free_matrix(mcopy);
-// 	return (0);
-// }
+void	flood_fill(char **map_copy, int x, int y, t_game *game)
+{
+	if (x < 0 || x >= game->config.width || y < 0 || y >= game->config.height)
+	{
+		free_matrix(map_copy);
+		finish_game("There is a problem with the map!", game);
+	}
+	if (map_copy[y][x] == '1' || map_copy[y][x] == '*')
+		return ;
+	if (map_copy[y][x] == '\0' || map_copy[y][x] == ' '
+		|| map_copy[y][x] == '\t' || map_copy[y][x] == '\n'
+		|| map_copy[y][x] == '+')
+	{
+		free_matrix(map_copy);
+		finish_game("There is a problem with the map!", game);
+	}
+	map_copy[y][x] = '*';
+	flood_fill(map_copy, x + 1, y, game);
+	flood_fill(map_copy, x - 1, y, game);
+	flood_fill(map_copy, x, y + 1, game);
+	flood_fill(map_copy, x, y - 1, game);
+}
 
-// void	counting_map(t_game *game)
-// {	
-// 	int	i;
-// 	int	len;
+char	**map_copy(char **map, t_game *game)
+{
+	char	**mcopy;
+	int		i;
 
-// 	i = 0;
-// 	while (game->config.map[i])
-// 	{
-// 		len = 0;
-// 		trim_end_whitespace(game->config.map[i]);
-// 		len = ft_strlen(game->config.map[i]);
-// 		if (len > game->config.width)
-// 			game->config.width = len;
-// 		game->config.height++;
-// 		i++;
-// 	}
-// }
+	mcopy = (char **)malloc(sizeof(char *) * (game->config.height + 1));
+	if (!mcopy)
+	{
+		printf("Error\nMemory allocation error\n");
+		exit(EXIT_FAILURE);
+	}
+	i = 0;
+	while (map[i])
+	{
+		mcopy[i] = ft_strdup(map[i]);
+		if (!mcopy[i])
+		{
+			printf("Error\nMemory allocation error\n");
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+	mcopy[i] = NULL;
+	return (mcopy);
+}

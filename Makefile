@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 13:20:29 by shinckel          #+#    #+#              #
-#    Updated: 2024/09/01 17:20:47 by shinckel         ###   ########.fr        #
+#    Updated: 2024/09/01 18:33:25 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CFLAGS :=				-Wall -Wextra -Werror -I$(INC_DIR) -g
 
 CFLAGS +=				-I/opt/X11/include
 
-# CFLAGS +=				-fsanitize=address
+CFLAGS +=				-fsanitize=address
 
 MLXFLAGS =			-L ./minilibx-linux -lm -Ilmlx -lXext -lX11
 
