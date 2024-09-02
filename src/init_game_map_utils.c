@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 21:37:32 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:47:33 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:05:09 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,46 @@ int	find_max_width(char **map)
 	return (max_width);
 }
 
-int	find_map_start_and_height(char **map, int *map_start, int *height)
+int	find_map_start_and_height(char **map, int *map_start, int *h, int *n_empty)
 {
 	int	i;
 	int	j;
-	int	not_empty;
 
 	i = 0;
-	while (map[i++])
+	while (map[i])
 	{
 		j = 0;
-		not_empty = 0;
-		while (map[i][j++])
+		*n_empty = 0;
+		while (map[i][j])
 		{
 			if (ft_isalnum(map[i][j]))
 			{
 				if (*map_start == -1)
 					*map_start = i;
-				not_empty = 1;
-				(*height)++;
+				*n_empty = 1;
+				(*h)++;
 				break ;
 			}
+			j++;
 		}
-		if (not_empty == 0 && *map_start != -1)
+		if (*n_empty == 0 && *map_start != -1)
 			break ;
+		i++;
 	}
-	return (*height);
+	return (*h);
 }
 
 void	check_empty_line_validation(char **map, t_game *game)
 {
-	int	map_start;
-	int	height;
 	int	i;
 	int	j;
+	int	map_start;
+	int	height;
+	int	n_empty;
 
 	map_start = -1;
 	height = 0;
-	find_map_start_and_height(map, &map_start, &height);
+	find_map_start_and_height(map, &map_start, &height, &n_empty);
 	if (map_start == -1)
 		finish_game("Map in the wrong format!", game);
 	i = map_start + height;
