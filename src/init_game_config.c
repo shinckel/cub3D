@@ -6,11 +6,23 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:19:53 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:25:31 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 23:16:59 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
+
+int	is_collision(t_game *game, double new_x, double new_y)
+{
+	double	margin;
+
+	margin = 0.05;
+	if (game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '1')
+		return (1);
+	if (game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == '1')
+		return (1);
+	return (0);
+}
 
 char	**create_mockup(int width, int height, t_game *game)
 {

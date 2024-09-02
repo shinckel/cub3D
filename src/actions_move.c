@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions_move.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:15:46 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 18:00:06 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 23:12:25 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ void	move_forward(t_game *game)
 	double	new_x;
 	double	new_y;
 
-	new_x = game->p.pos_x + game->p.dir_x
-		* game->p.move_speed;
-	new_y = game->p.pos_y + game->p.dir_y
-		* game->p.move_speed;
-	if (game->config.map[(int)new_y][(int)new_x] == '0'
-		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+	new_x = game->p.pos_x + game->p.dir_x * game->p.move_speed;
+	new_y = game->p.pos_y + game->p.dir_y * game->p.move_speed;
+	if (!is_collision(game, new_x, new_y))
 	{
 		game->p.pos_x = new_x;
 		game->p.pos_y = new_y;
@@ -34,12 +31,9 @@ void	move_backward(t_game *game)
 	double	new_x;
 	double	new_y;
 
-	new_x = game->p.pos_x - game->p.dir_x
-		* game->p.move_speed;
-	new_y = game->p.pos_y - game->p.dir_y
-		* game->p.move_speed;
-	if (game->config.map[(int)new_y][(int)new_x] == '0'
-		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+	new_x = game->p.pos_x - game->p.dir_x * game->p.move_speed;
+	new_y = game->p.pos_y - game->p.dir_y * game->p.move_speed;
+	if (!is_collision(game, new_x, new_y))
 	{
 		game->p.pos_x = new_x;
 		game->p.pos_y = new_y;
@@ -51,12 +45,9 @@ void	move_left(t_game *game)
 	double	new_x;
 	double	new_y;
 
-	new_x = game->p.pos_x - game->p.plane_x
-		* game->p.move_speed;
-	new_y = game->p.pos_y - game->p.plane_y
-		* game->p.move_speed;
-	if (game->config.map[(int)new_y][(int)new_x] == '0'
-		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+	new_x = game->p.pos_x - game->p.plane_x * game->p.move_speed;
+	new_y = game->p.pos_y - game->p.plane_y * game->p.move_speed;
+	if (!is_collision(game, new_x, new_y))
 	{
 		game->p.pos_x = new_x;
 		game->p.pos_y = new_y;
@@ -68,14 +59,79 @@ void	move_right(t_game *game)
 	double	new_x;
 	double	new_y;
 
-	new_x = game->p.pos_x + game->p.plane_x
-		* game->p.move_speed;
-	new_y = game->p.pos_y + game->p.plane_y
-		* game->p.move_speed;
-	if (game->config.map[(int)new_y][(int)new_x] == '0'
-		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+	new_x = game->p.pos_x + game->p.plane_x * game->p.move_speed;
+	new_y = game->p.pos_y + game->p.plane_y * game->p.move_speed;
+	if (!is_collision(game, new_x, new_y))
 	{
 		game->p.pos_x = new_x;
 		game->p.pos_y = new_y;
 	}
 }
+
+// void	move_forward(t_game *game)
+// {
+// 	double	new_x;
+// 	double	new_y;
+
+// 	new_x = game->p.pos_x + game->p.dir_x
+// 		* game->p.move_speed;
+// 	new_y = game->p.pos_y + game->p.dir_y
+// 		* game->p.move_speed;
+// 	if (game->config.map[(int)new_y][(int)new_x] == '0'
+// 		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+// 	{
+// 		game->p.pos_x = new_x;
+// 		game->p.pos_y = new_y;
+// 	}
+// }
+
+// void	move_backward(t_game *game)
+// {
+// 	double	new_x;
+// 	double	new_y;
+
+// 	new_x = game->p.pos_x - game->p.dir_x
+// 		* game->p.move_speed;
+// 	new_y = game->p.pos_y - game->p.dir_y
+// 		* game->p.move_speed;
+// 	if (game->config.map[(int)new_y][(int)new_x] == '0'
+// 		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+// 	{
+// 		game->p.pos_x = new_x;
+// 		game->p.pos_y = new_y;
+// 	}
+// }
+
+// void	move_left(t_game *game)
+// {
+// 	double	new_x;
+// 	double	new_y;
+
+// 	new_x = game->p.pos_x - game->p.plane_x
+// 		* game->p.move_speed;
+// 	new_y = game->p.pos_y - game->p.plane_y
+// 		* game->p.move_speed;
+// 	if (game->config.map[(int)new_y][(int)new_x] == '0'
+// 		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+// 	{
+// 		game->p.pos_x = new_x;
+// 		game->p.pos_y = new_y;
+// 	}
+// }
+
+// void	move_right(t_game *game)
+// {
+// 	double	new_x;
+// 	double	new_y;
+
+// 	new_x = game->p.pos_x + game->p.plane_x
+// 		* game->p.move_speed;
+// 	new_y = game->p.pos_y + game->p.plane_y
+// 		* game->p.move_speed;
+// 	if (game->config.map[(int)new_y][(int)new_x] == '0'
+// 		|| ft_strchr("NSWE", game->config.map[(int)new_y][(int)new_x]))
+// 	{
+// 		game->p.pos_x = new_x;
+// 		game->p.pos_y = new_y;
+// 	}
+// }

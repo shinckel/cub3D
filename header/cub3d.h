@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:19:57 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:52:00 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 23:11:48 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	initialize_ray(t_game *game, t_ray *ray, int x);
 void	cast_single_ray(t_game *game, int x);
 void	cast_rays(t_game *game);
 // move
+int		is_collision(t_game *game, double new_x, double new_y);
 void	move_forward(t_game *game);
 void	move_backward(t_game *game);
 void	move_left(t_game *game);
