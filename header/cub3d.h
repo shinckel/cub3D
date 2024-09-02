@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:19:57 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 15:44:41 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:57:46 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,14 @@ void	draw_texture(t_game *game, t_image *texture, int x, int y);
 void	draw_player(t_image *img, t_game *game, int x, int y);
 void	draw_player_on_map(t_game *game);
 // handle keys and file utils
-int		handle_key_press(int keycode, t_game *game);
+// int		handle_key_press(int keycode, t_game *game);
 int		open_file(char *filename);
 int		my_isspace(char c);
 char	*trim_end_whitespace(char *str);
 void	update_game(t_game *game);
+
+int   handle_key_press(int keycode, t_game *game);
+int   handle_key_release(int keycode, t_game *game);
+int   process_input(t_game *game);
 
 #endif
