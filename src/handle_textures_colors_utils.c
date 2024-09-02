@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:25:28 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:51:55 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:31:46 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*skip_spaces(char *line)
 	return (line);
 }
 
-// TODO: check for leaks (free line)
 void	extract_color(char *line, t_game *game, int *texture_found, int *err)
 {
 	line = skip_spaces(line);

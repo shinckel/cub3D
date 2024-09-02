@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:43:05 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:51:55 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:43:05 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ void	extract_textures_and_colors(int fd, t_game *game)
 		trim_end_whitespace(line);
 		extract_texture(line, game, &texture_found, &err);
 		free(line);
-		if (err)
+		if (err || texture_found == 6)
 			break ;
 		line = get_next_line(fd);
 	}
 	if (err)
 		finish_game("Textures/colors validation failed!", game);
-	else
-		free(line);
 }
 
 int	validate_color_string(char *color_str)
@@ -75,8 +73,11 @@ int	parse_rgb_values(char *color_str, int *rgb, int *err)
 		count++;
 		while (*color_str && *color_str != ',')
 			color_str++;
-		if (*color_str++ == ',')
+		if (*color_str == ',')
+		{
 			flag++;
+			color_str++;
+		}
 	}
 	if (*err || flag != 2 || count != 3)
 		*err = 1;
@@ -87,6 +88,8 @@ int	parse_color(char *color_str, int *err)
 {
 	int	rgb[3];
 
+	if (*color_str == '\0')
+		return (-1);
 	*err = validate_color_string(color_str);
 	if (parse_rgb_values(color_str, rgb, err) || *err)
 		return (-1);
