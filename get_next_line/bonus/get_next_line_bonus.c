@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:28:14 by shinckel          #+#    #+#             */
-/*   Updated: 2024/06/16 17:34:47 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:55:33 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,23 @@ char	*get_next_line(int fd)
 	return (tmp);
 }
 
-int main(void)
-{
-	int fd;
-	int fd2;
+// int main(void)
+// {
+// 	int fd;
+// 	int fd2;
 
-	fd = open("Sofia.txt", O_RDONLY);
-	fd2 = open("Morango.txt", O_RDONLY);
-	printf("line 01: %s\n", get_next_line(fd));
-	printf("line 02: %s\n", get_next_line(fd));
-	printf("line 01: %s\n", get_next_line(fd2));
-	printf("line 02: %s\n", get_next_line(fd2));
-	printf("line 01: %s\n", get_next_line(fd));
-	printf("line 02: %s\n", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	close(fd);
-	close (fd2);
-	return (0);
-}
+// 	fd = open("Sofia.txt", O_RDONLY);
+// 	fd2 = open("Morango.txt", O_RDONLY);
+// 	printf("line 01: %s\n", get_next_line(fd));
+// 	printf("line 02: %s\n", get_next_line(fd));
+// 	printf("line 01: %s\n", get_next_line(fd2));
+// 	printf("line 02: %s\n", get_next_line(fd2));
+// 	printf("line 01: %s\n", get_next_line(fd));
+// 	printf("line 02: %s\n", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	close(fd);
+// 	close (fd2);
+// 	return (0);
+// }

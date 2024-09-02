@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_config.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:19:53 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 16:02:07 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:25:31 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
 
-char **create_mockup(int width, int height, t_game *game)
+char	**create_mockup(int width, int height, t_game *game)
 {
 	int		i;
 	int		j;
-  char	**mockup;
+	char	**mockup;
 
 	mockup = malloc((height + 2) * sizeof(char *));
 	if (!mockup)
-			finish_game("Failed in creating mockup!", game);
+		finish_game("Failed in creating mockup!", game);
 	i = 0;
 	while (i < height)
 	{
@@ -36,34 +36,40 @@ char **create_mockup(int width, int height, t_game *game)
 		mockup[i][width] = '\0';
 		i++;
 	}
-    mockup[height] = NULL;
-    return mockup;
+	mockup[height] = NULL;
+	return (mockup);
 }
 
-void copy_map_to_mockup(char **map, char **mockup)
+void	copy_map_to_mockup(char **map, char **mockup)
 {
-    int i = 0;
-    while (map[i])
-    {
-        int j = 0;
-        while (map[i][j])
-        {
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
 			if (map[i][j] == ' ')
 				mockup[i][j] = '+';
 			else
-            	mockup[i][j] = map[i][j];
-            j++;
-        }
-        i++;
-    }
+				mockup[i][j] = map[i][j];
+			j++;
+		}
+		i++;
+	}
 }
 
-char **normalize_map(char **map, t_game *game)
+char	**normalize_map(char **map, t_game *game)
 {
-    int max_width = find_max_width(map);
-    int height = find_height(map, game);
-    char **mockup = create_mockup(max_width, height, game);
-    copy_map_to_mockup(map, mockup);
+	int		max_width;
+	int		height;
+	char	**mockup;
 
-    return mockup;
+	max_width = find_max_width(map);
+	height = find_height(map, game);
+	mockup = create_mockup(max_width, height, game);
+	copy_map_to_mockup(map, mockup);
+	return (mockup);
 }

@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:14:12 by dde-sott          #+#    #+#             */
-/*   Updated: 2024/09/02 18:02:25 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:54:33 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
-
-// void print_map(char **map)
-// {
-//     int i = 0;
-//     while (map[i])
-//     {
-//         printf("%s\n", map[i]);
-//         i++;
-//     }
-// }
 
 void	update_game(t_game *game)
 {
@@ -32,8 +22,9 @@ void	update_game(t_game *game)
 
 void	init_game(t_game *game)
 {
-	game->p.move_speed = 0.2;
-	game->p.rot_speed = 0.2;
+	init_player_position(game);
+	game->p.move_speed = 0.01;
+	game->p.rot_speed = 0.01;
 	game->config.width = 0;
 	game->config.height = 0;
 	game->win.mlx_ptr = mlx_init();
@@ -68,38 +59,41 @@ int	check_name(char *name)
  * check_map_char: validate map
  * check_enclosed_map: flood-fill
 */
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_game game;
+	t_game	game;
 
-    ft_memset(&game, 0, sizeof(t_game));
-    if (argc != 2)
-    {
-        printf("Error\nThe filename is missing!\n");
-        return (EXIT_FAILURE);
-    }
-    if (check_name(argv[1]))
-        return (1);
-    game.config.map = read_map(argv[1], &game);
-    counting_map(&game, game.config.map);
-    game.config.map_norm = normalize_map(game.config.map, &game);
-    check_map_char(game.config.map_norm, &game);
-    check_enclosed_map(game.config.map_norm, &game);
-    check_single_player(game.config.map_norm, &game);
-    init_game(&game);
-    init_player_position(&game);
-    cast_rays(&game);
-    mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, game.img.img_ptr, 0, 0);
-
-    // Set up hooks
-    mlx_hook(game.win.win_ptr, 2, 1L << 0, handle_key_press, &game);
-    mlx_hook(game.win.win_ptr, 3, 1L << 1, handle_key_release, &game);
-    mlx_hook(game.win.win_ptr, 17, 1L << 17, exit_game, &game);
-
-    // Main loop
-    mlx_loop_hook(game.win.mlx_ptr, process_input, &game);
-    mlx_loop(game.win.mlx_ptr);
-
-    cleanup(&game);
-    return (EXIT_SUCCESS);
+	ft_memset(&game, 0, sizeof(t_game));
+	if (argc != 2 || check_name(argv[1]))
+	{
+		printf("Error\nThe filename is missing!\n");
+		return (EXIT_FAILURE);
+	}
+	game.config.map = read_map(argv[1], &game);
+	counting_map(&game, game.config.map);
+	game.config.map_norm = normalize_map(game.config.map, &game);
+	check_map_char(game.config.map_norm, &game);
+	check_enclosed_map(game.config.map_norm, &game);
+	check_single_player(game.config.map_norm, &game);
+	init_game(&game);
+	cast_rays(&game);
+	mlx_put_image_to_window(game.win.mlx_ptr, game.win.win_ptr, \
+		game.img.img_ptr, 0, 0);
+	mlx_hook(game.win.win_ptr, 2, 1L << 0, handle_key_press, &game);
+	mlx_hook(game.win.win_ptr, 3, 1L << 1, handle_key_release, &game);
+	mlx_hook(game.win.win_ptr, 17, 1L << 17, exit_game, &game);
+	mlx_loop_hook(game.win.mlx_ptr, process_input, &game);
+	mlx_loop(game.win.mlx_ptr);
+	cleanup(&game);
+	return (EXIT_SUCCESS);
 }
+
+// void print_map(char **map)
+// {
+//     int i = 0;
+//     while (map[i])
+//     {
+//         printf("%s\n", map[i]);
+//         i++;
+//     }
+// }

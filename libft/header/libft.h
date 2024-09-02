@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dde-sott <dde-sott@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 17:03:33 by shinckel          #+#    #+#             */
-/*   Updated: 2024/08/06 22:00:02 by dde-sott         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:54:25 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-	int			*new_node;
+	int				*new_node;
 }	t_list;
 
 /* <linked list> creates a new list's node*/

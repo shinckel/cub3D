@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:20:00 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 16:57:42 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:07:59 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_game
 	t_info		p;
 	char		**map;
 	t_config	config;
-	int				keys[6];
+	int			keys[6];
 }				t_game;
 
 #endif

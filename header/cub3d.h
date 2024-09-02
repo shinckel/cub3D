@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:19:57 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 17:57:46 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:52:00 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	counting_map(t_game *game, char **map);
 char	*trim_end_whitespace(char *str);
 // free
 void	free_matrix(char **matrix);
-void	finish_game(char* msg, t_game *game);
+void	finish_game(char *msg, t_game *game);
 void	cleanup(t_game *game);
 void	free_list(t_list *lst);
 void	free_textures(t_game *game);
@@ -65,7 +65,7 @@ void	check_empty_line_validation(char **map, t_game *game);
 // validate textures and colors/determine texture && player
 char	**read_map(char *filename, t_game *game);
 void	extract_textures_and_colors(int fd, t_game *game);
-void	extract_texture(char *line, t_game *game, int *textures_found, int *err);
+void	extract_texture(char *line, t_game *game, int *texture_found, int *err);
 int		parse_color(char *color_str, int *err);
 void	load_all_textures(t_game *game);
 void	load_texture(t_game *game, t_image *texture, char *path);
@@ -101,14 +101,12 @@ void	draw_texture(t_game *game, t_image *texture, int x, int y);
 void	draw_player(t_image *img, t_game *game, int x, int y);
 void	draw_player_on_map(t_game *game);
 // handle keys and file utils
-// int		handle_key_press(int keycode, t_game *game);
 int		open_file(char *filename);
 int		my_isspace(char c);
 char	*trim_end_whitespace(char *str);
 void	update_game(t_game *game);
-
-int   handle_key_press(int keycode, t_game *game);
-int   handle_key_release(int keycode, t_game *game);
-int   process_input(t_game *game);
+int		handle_key_press(int keycode, t_game *game);
+int		handle_key_release(int keycode, t_game *game);
+int		process_input(t_game *game);
 
 #endif

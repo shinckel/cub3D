@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 20:17:31 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 14:58:31 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:58:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_list(t_list *lst)
 	}
 }
 
-void	finish_game(char* msg, t_game *game)
+void	finish_game(char *msg, t_game *game)
 {
 	printf("Error\n%s\n", msg);
 	cleanup(game);
@@ -40,7 +40,7 @@ void	cleanup(t_game *game)
 	if (game->config.map)
 		free_matrix(game->config.map);
 	if (game->config.map_norm)
-	 	free_matrix(game->config.map_norm);
+		free_matrix(game->config.map_norm);
 	if (game->img.img_ptr)
 		mlx_destroy_image(game->win.mlx_ptr, game->img.img_ptr);
 	if (game->win.win_ptr)
