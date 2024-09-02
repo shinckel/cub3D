@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_config.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:19:53 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/01 21:36:51 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:02:07 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,20 @@
 
 char **create_mockup(int width, int height, t_game *game)
 {
-	int	i;
-	int	j;
-    char **mockup;
+	int		i;
+	int		j;
+  char	**mockup;
+
 	mockup = malloc((height + 2) * sizeof(char *));
 	if (!mockup)
-	{
-		printf("Error\n");
-		cleanup(game);
-		exit(EXIT_FAILURE);
-	}
-
+			finish_game("Failed in creating mockup!", game);
 	i = 0;
 	while (i < height)
 	{
 		j = 0;
 		mockup[i] = malloc((width + 1) * sizeof(char));
-		if (!mockup[i]) {
-            printf("Error\n");
-            cleanup(game);
-            exit(EXIT_FAILURE);
-        }
+		if (!mockup[i])
+			finish_game("Failed in creating mockup!", game);
 		while (j < width + 1)
 		{
 			mockup[i][j] = '+';

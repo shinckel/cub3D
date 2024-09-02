@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:19:57 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/01 21:48:56 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:44:41 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	check_empty_line_validation(char **map, t_game *game);
 // validate textures and colors/determine texture && player
 char	**read_map(char *filename, t_game *game);
 void	extract_textures_and_colors(int fd, t_game *game);
-void	extract_texture(char *line, t_game *game, int *textures_found);
-int		parse_color(char *color_str, t_game *game);
+void	extract_texture(char *line, t_game *game, int *textures_found, int *err);
+int		parse_color(char *color_str, int *err);
 void	load_all_textures(t_game *game);
 void	load_texture(t_game *game, t_image *texture, char *path);
 void	calculate_texture_coordinates(t_ray *ray, t_game *game);

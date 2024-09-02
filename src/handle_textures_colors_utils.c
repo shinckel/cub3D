@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_textures_colors_utils.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:25:28 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/01 22:40:18 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:49:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,24 @@ char	*skip_spaces(char *line)
 }
 
 // TODO: check for leaks (free line)
-void	extract_color(char *line, t_game *game, int *textures_found)
+void	extract_color(char *line, t_game *game, int *textures_found, int *err)
 {
-	char	*line_cpy;
-
-	line_cpy = skip_spaces(line);
-	if (ft_strncmp(line_cpy, "F", 1) == 0 && !game->colors.floor)
+	line = skip_spaces(line);
+	if (ft_strncmp(line, "F", 1) == 0 && !game->colors.floor)
 	{
-		game->colors.floor = parse_color(skip_spaces(line_cpy + 1), game);
+		game->colors.floor = parse_color(skip_spaces(line + 1), err);
 		(*textures_found)++;
 	}
-	else if (ft_strncmp(line_cpy, "C", 1) == 0 && !game->colors.ceiling)
+	else if (ft_strncmp(line, "C", 1) == 0 && !game->colors.ceiling)
 	{
-		game->colors.ceiling = parse_color(skip_spaces(line_cpy + 1), game);
+		game->colors.ceiling = parse_color(skip_spaces(line + 1), err);
 		(*textures_found)++;
 	}
-	else if (*line_cpy != '\n')
-	{
-		//free(line);
-		finish_game("Texture/color info is wrong in the map file!", game);
-	}
+	else if (*line != '\n')
+		*err = 1;
 }
 
-void	extract_texture(char *line, t_game *game, int *textures_found)
+void	extract_texture(char *line, t_game *game, int *textures_found, int *err)
 {
 	char	*line_cpy;
 
@@ -68,8 +63,5 @@ void	extract_texture(char *line, t_game *game, int *textures_found)
 		(*textures_found)++;
 	}
 	else
-	{
-		//free(line);
-		extract_color(line_cpy, game, textures_found);
-	}
+		extract_color(line_cpy, game, textures_found, err);
 }
