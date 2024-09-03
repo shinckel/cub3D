@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 20:17:31 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/03 14:25:55 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:46:09 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	cleanup(t_game *game)
 {
 	if (!game)
 		return ;
+	// if (game->config.fd)
+	// 	close(game->config.fd);
 	free_textures(game);
 	if (game->config.map)
 		free_matrix(game->config.map);

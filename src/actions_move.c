@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions_move.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:15:46 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/03 17:04:28 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:17:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void move_right(t_game *game)
 // 	}
 // }
 
+// FIRST OLD
 // void	move_forward(t_game *game)
 // {
 // 	double	new_x;

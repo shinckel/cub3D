@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:20:00 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:07:59 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:43:45 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_config
 	char			**map;
 	int				mt_size;
 	char			**map_norm;
+	int				fd;
 	t_walls			walls;
 }		t_config;
 

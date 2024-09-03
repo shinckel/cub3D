@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:43:05 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 22:43:05 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:58:50 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	extract_textures_and_colors(int fd, t_game *game)
 		line = get_next_line(fd);
 	}
 	if (err)
+	{
+		close(fd);
 		finish_game("Textures/colors validation failed!", game);
+	}	
 }
 
 int	validate_color_string(char *color_str)
@@ -89,9 +92,15 @@ int	parse_color(char *color_str, int *err)
 	int	rgb[3];
 
 	if (*color_str == '\0')
+	{
+		*err = 1;
 		return (-1);
+	}
 	*err = validate_color_string(color_str);
 	if (parse_rgb_values(color_str, rgb, err) || *err)
+	{
+		*err = 1;
 		return (-1);
+	}
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }

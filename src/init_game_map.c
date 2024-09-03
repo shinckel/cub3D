@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:38:38 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 22:42:43 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:44:39 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,27 @@ char	**convert_map_to_array(t_list *map_lines)
 
 char	**read_map(char *filename, t_game *game)
 {
-	int		fd;
+	//int		fd;
 	t_list	*map_lines;
 	t_list	*new_node;
 	char	*line;
 	char	**map;
 
-	fd = open_file(filename);
-	extract_textures_and_colors(fd, game);
+	game->config.fd = open_file(filename);
+	extract_textures_and_colors(game->config.fd, game);
 	map_lines = NULL;
 	new_node = NULL;
-	line = get_next_line(fd);
+	line = get_next_line(game->config.fd);
 	while (line != NULL)
 	{
 		new_node = ft_lstnew(ft_strdup(line));
 		ft_lstadd_back(&map_lines, new_node);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(game->config.fd);
 	}
 	if (!map_lines)
 		finish_game("Map is empty!", game);
-	close(fd);
+	close(game->config.fd);
 	map = convert_map_to_array(map_lines);
 	return (map);
 }
