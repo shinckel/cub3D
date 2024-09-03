@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 21:18:47 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 20:07:25 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:15:08 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	perform_dda(t_game *game, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->config.map[ray->map_y][ray->map_x] == '1')
+		if (game->config.map[ray->map_y][ray->map_x] == '1' || game->config.map[ray->map_y][ray->map_x] == ' ' || game->config.map[ray->map_y][ray->map_x] == '\0')
 			ray->hit = 1;
 	}
 }

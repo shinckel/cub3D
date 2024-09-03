@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:19:53 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 23:16:59 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:48:08 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	is_collision(t_game *game, double new_x, double new_y)
 {
 	double	margin;
 
-	margin = 0.05;
-	if (game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '1')
+	margin = 0.1;
+	if (game->config.map[(int)(new_y)][(int)(new_x)] == ' ' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\0')
 		return (1);
-	if (game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == '1')
+	if (game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '1' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\0' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == ' ')
+		return (1);
+	if (game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == '1' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\0' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == ' ')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 13:20:29 by shinckel          #+#    #+#              #
-#    Updated: 2024/09/01 22:02:01 by shinckel         ###   ########.fr        #
+#    Updated: 2024/09/03 14:39:40 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC :=						gcc
 
 INC_DIR :=			./header
 
-CFLAGS :=				-Wall -Wextra -Werror -I$(INC_DIR) -g
+CFLAGS :=				-Wall -Wextra -Werror -I$(INC_DIR) -O3 -g
 
 CFLAGS +=				-I/opt/X11/include
 
@@ -41,6 +41,20 @@ LIBFT_DIR :=		./libft
 MINILIBX_DIR :=	./minilibx-linux
 
 SRC :=					$(wildcard $(SRC_DIR)/*.c)
+
+# SRC :=					$(SRC_DIR)/actions_move.c \
+# 						$(SRC_DIR)/actions_rotate.c \
+# 						$(SRC_DIR)/draw_utils.c \
+# 						$(SRC_DIR)/draw.c \
+# 						$(SRC_DIR)/free_memory_utils.c \
+# 						$(SRC_DIR)/free_memory.c \
+# 						$(SRC_DIR)/handle_keys_file.c \
+# 						$(SRC_DIR)/handle_textures_colors_utils.c \
+# 						$(SRC_DIR)/handle_textures_colors_utils2.c \
+# 						$(SRC_DIR)/handle_textures_colors_utils3.c \
+# 						$(SRC_DIR)/handle_textures_colors.c \
+# 						$(SRC_DIR)/init_checks.c \
+# 						$(SRC_DIR)/init_game_config.c
 
 OBJ :=					$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
