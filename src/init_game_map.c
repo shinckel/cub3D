@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:38:38 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/03 18:36:17 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:53:17 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ char	**read_map(char *filename, t_game *game)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	if (!map_lines)
 		finish_game("Map is empty!", game);
-	close(fd);
 	map = convert_map_to_array(map_lines);
 	return (map);
 }

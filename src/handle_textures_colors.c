@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:43:05 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/03 19:02:39 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:40:41 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,98 +42,6 @@ void	extract_textures_and_colors(int fd, t_game *game)
 	}
 }
 
-int	validate_digit_sequence(char *color_str, int *i)
-{
-	int	found_digit;
-
-	found_digit = 0;
-	while (ft_isdigit(color_str[*i]))
-	{
-		found_digit = 1;
-		(*i)++;
-	}
-	while (color_str[*i] == ' ')
-		(*i)++;
-	if (color_str[*i] && color_str[*i] != ',')
-		return (1);
-	return (!found_digit);
-}
-
-int	validate_color_string(char *color_str)
-{
-	int i = 0;
-
-	while (color_str[i])
-	{
-		if (validate_digit_sequence(color_str, &i))
-			return (1);
-		if (color_str[i] == ',')
-			i++;
-		else if (color_str[i] == ' ')
-			i++;
-		else if (!ft_isdigit(color_str[i]) && color_str[i] != '\0')
-			return (1);
-	}
-	return (0);
-}
-
-// int	validate_digit_sequence(char *color_str, int *found_digit, int *i)
-// {
-// 	printf("sofia\n");
-// 	if (ft_isdigit(color_str[*i]))
-// 	{
-// 		printf("i: %d str: %c\n", *i, color_str[*i]);
-// 		*found_digit = 1;
-// 		while (ft_isdigit(color_str[*i]))
-// 		{
-// 			(*i)++;
-// 			printf("loop i: %d str: %c\n", *i, color_str[*i]);
-
-// 		}
-// 		while (color_str[*i] == ' ')
-// 			(*i)++;
-// 		if (color_str[*i] && color_str[*i] != ',')
-// 		{
-// 			printf("sofia\n");
-// 			return (1);
-// 		}
-// 	}
-// 	return (0);
-// }
-
-// if (ft_isdigit(color_str[i]))
-		// {
-		// 	found_digit = 1;
-		// 	while (ft_isdigit(color_str[i]))
-		// 		i++;
-		// 	while (color_str[i] == ' ')
-		// 		i++;
-		// 	if (color_str[i] && color_str[i] != ',')
-		// 		return (1);
-		// }
-// int	validate_color_string(char *color_str)
-// {
-// 	int i = 0;
-// 	int found_digit = 0;
-
-// 	while (color_str[i])
-// 	{
-// 		if (validate_digit_sequence(color_str, &found_digit, &i))
-// 			return (1);
-// 		else if (color_str[i] == ',')
-// 		{
-// 			if (!found_digit)
-// 				return (1);
-// 			found_digit = 0;
-// 			i++;
-// 		}
-// 		else if (color_str[i] == ' ')
-// 			i++;
-// 		else
-// 			return (1);
-// 	}
-// 	return (!found_digit);
-// }
 // int	validate_color_string(char *color_str)
 // {
 // 	int	i;
@@ -173,6 +81,47 @@ int	validate_color_string(char *color_str)
 // 	return (0);
 // }
 
+int	validate_digits(char **color_str)
+{
+	int	found_digit;
+
+	found_digit = 0;
+	while (**color_str)
+	{
+		while (**color_str == ' ')
+			(*color_str)++;
+		if (ft_isdigit(**color_str))
+		{
+			found_digit = 1;
+			while (ft_isdigit(**color_str))
+				(*color_str)++;
+		}
+		if (**color_str != ',' && **color_str != ' ' && **color_str != '\0')
+			return (1);
+		break ;
+	}
+	if (found_digit == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	validate_color_string(char *color_str)
+{
+	while (*color_str)
+	{
+		if (validate_digits(&color_str))
+			return (1);
+		while (*color_str == ' ')
+			color_str++;
+		if (*color_str == ',')
+			color_str++;
+		else if (*color_str != '\0')
+			return (1);
+	}
+	return (0);
+}
+
 // validation: we should have exactly 3 numbers and 2 commas
 int	parse_rgb_values(char *color_str, int *rgb, int *err)
 {
@@ -199,7 +148,6 @@ int	parse_rgb_values(char *color_str, int *rgb, int *err)
 	}
 	if (*err || flag != 2 || count != 3)
 		*err = 1;
-
 	return (*err);
 }
 

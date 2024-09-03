@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:14:12 by dde-sott          #+#    #+#             */
-/*   Updated: 2024/09/03 14:31:51 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 20:11:28 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	update_game(t_game *game)
 void	init_game(t_game *game)
 {
 	init_player_position(game);
-	game->p.move_speed = 0.02;
-	game->p.rot_speed = 0.02;
+	game->p.move_speed = 0.015;
+	game->p.rot_speed = 0.01;
 	game->config.width = 0;
 	game->config.height = 0;
 	game->win.mlx_ptr = mlx_init();

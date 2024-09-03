@@ -3,7 +3,7 @@ SO ./textures/eagle.xpm
 WE ./textures/greystone.xpm
 EA ./textures/redbrick.xpm
 
-F 0,0,20
+F         0     ,100    ,     1
 C 0,0,0
 
 111111111111

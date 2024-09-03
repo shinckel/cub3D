@@ -6,22 +6,31 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 19:19:53 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/03 17:29:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:45:37 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
 
+// 'm' meaning is margin
 int	is_collision(t_game *game, double new_x, double new_y)
 {
-	double	margin;
+	double	m;
 
-	margin = 0.04;
-	if (game->config.map[(int)(new_y)][(int)(new_x)] == ' ' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\0' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\n')
+	m = 0.04;
+	if (game->config.map[(int)(new_y)][(int)(new_x)] == ' '
+		|| game->config.map[(int)(new_y + m)][(int)(new_x + m)] == '\0'
+		|| game->config.map[(int)(new_y + m)][(int)(new_x + m)] == '\n')
 		return (1);
-	if (game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '1' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\0' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == ' ' || game->config.map[(int)(new_y + margin)][(int)(new_x + margin)] == '\n')
+	if (game->config.map[(int)(new_y + m)][(int)(new_x + m)] == '1'
+		|| game->config.map[(int)(new_y + m)][(int)(new_x + m)] == '\0'
+		|| game->config.map[(int)(new_y + m)][(int)(new_x + m)] == ' '
+		|| game->config.map[(int)(new_y + m)][(int)(new_x + m)] == '\n')
 		return (1);
-	if (game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == '1' || game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == '\0' || game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == ' ' || game->config.map[(int)(new_y - margin)][(int)(new_x - margin)] == '\n')
+	if (game->config.map[(int)(new_y - m)][(int)(new_x - m)] == '1'
+		|| game->config.map[(int)(new_y - m)][(int)(new_x - m)] == '\0'
+		|| game->config.map[(int)(new_y - m)][(int)(new_x - m)] == ' '
+		|| game->config.map[(int)(new_y - m)][(int)(new_x - m)] == '\n')
 		return (1);
 	return (0);
 }
