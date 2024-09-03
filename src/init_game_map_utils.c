@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 21:37:32 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/02 21:05:09 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:44:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	find_max_width(char **map)
 	while (map[i])
 	{
 		trim_end_whitespace(map[i]);
-		width = strlen(map[i]);
+		width = ft_strlen(map[i]);
 		if (width > max_width)
 			max_width = width;
 		i++;

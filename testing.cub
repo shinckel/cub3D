@@ -3,8 +3,8 @@ SO ./textures/eagle.xpm
 WE ./textures/greystone.xpm
 EA ./textures/redbrick.xpm
 
-F 0,0,0
-C 100,100,100
+F 0,0,20
+C 0,0,0
 
 111111111111
 100000000001

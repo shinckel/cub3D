@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:19:57 by shinckel          #+#    #+#             */
-/*   Updated: 2024/09/03 14:42:16 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:44:18 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 # define CUB3D_H
 
 # include <math.h>
-# include <limits.h>
-# include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <fcntl.h>
 # include "config.h"
 # include "../minilibx-linux/mlx.h"
 # include "../get_next_line/header/get_next_line.h"
